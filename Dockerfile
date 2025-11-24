@@ -3,14 +3,15 @@ FROM python:3.12
 ENV PYTHONUNBUFFERED=1
 
 
-WORKDIR /app
+WORKDIR /hotel_app
 
 
 COPY req.txt /app/
 RUN pip install --upgrade pip && \
     pip install -r req.txt
 
+COPY nginx/nginx.conf /etc/nginx/conf.d/
 
-COPY . /app/
 
-CMD ["uvicorn", "main:booking_app", "--host 0.0.0.0", "--port 8000"]
+COPY . /hotel_app/
+
